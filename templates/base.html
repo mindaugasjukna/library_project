@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        <!-- TITLE INSERTED HERE --> {% endblock title%} - Library</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr />
+
+    <main>
+        <!-- BODY -->
+        {% block content %}
+
+
+        {% endblock content %}
+    </main>
+
+    <hr />
+    <footer>
+        <p>This is footer</p>
+    </footer>
+</body>
+
+</html>
