@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock title%}
+
+<!-- Main page stuff -->
+{% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<div>
+  <h2>Welcome, {{user.username}}</h2>
+
+  <div>
+  <h1>Loaned Books</h1>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Returned</th>
+        <th>Days left</th>
+        <th>Manage</th>
+      </tr>
+      {% for bookloan in bookloans %}
+      <tr>
+        <td>{{bookloan.book.title}}</td>
+        <td>{{bookloan.book.author}}</td>
+        <td>{{bookloan.book.publisher}}</td>
+        <td>{% if bookloan.returned_timestamp == NULL  %} False  {% else %} True {% endif %} </td>
+        <td>{{bookloan.loaned_timestamp}}</td>
+        <td> <a href="{% url "user_app:return_item" "book" bookloan.book.id %}">Return</a> </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div>
+  <h1>Loaned Magazines</h1>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Returned</th>
+        <th>Days left</th>
+        <th>Manage</th>
+      </tr>
+      {% for magazineloan in magazineloans %}
+      <tr>
+        <td>{{magazineloan.magazine.title}}</td>
+        <td>{{magazineloan.magazine.author}}</td>
+        <td>{{magazineloan.magazine.publisher}}</td>
+        <td>{% if magazineloan.returned_timestamp == NULL  %} False  {% else %} True {% endif %} </td>
+        <td>{{magazineloan.loaned_timestamp}}</td>
+        <td> <a href="{% url "user_app:return_item" "magazine" magazineloan.magazine.id %}">Return</a> </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</div>
+{% endblock content%}

@@ -5,12 +5,65 @@ Home
 {% endblock title %}
 
 {% block content %}
-<h1>Welcome to the django library</h1>
-<div id="items-list">
-    <ul>
-        {% for book in books %}
-        <li><a href="{% url "library_app:loan_item" "book" book.id %}">{{book.title}} {{book.author}} {{book.publisher}}</a></li>
-        {% endfor %}
-    </ul>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<div>
+  <h2>Welcome, {{user.username}}</h2>
+
+  <div>
+  <h1>Books</h1>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Manage</th>
+      </tr>
+      {% for book in books %}
+      <tr>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.publisher}}</td>
+        <td> <a href="{% url "user_app:loan_item" "book" book.id %}">Loan</a> </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div>
+  <h1>Magazines</h1>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Manage</th>
+      </tr>
+      {% for magazine in magazines %}
+      <tr>
+        <td>{{magazine.title}}</td>
+        <td>{{magazine.author}}</td>
+        <td>{{magazine.publisher}}</td>
+        <td> <a href="{% url "user_app:loan_item" "magazine" magazine.id %}">Loan</a> </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 </div>
 {% endblock content%}
